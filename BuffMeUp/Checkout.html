@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Store</title>
+    <!-- Include Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <!-- Your CSS and other scripts -->
+    <link rel="stylesheet" href="styles.css"> <!-- Adjust path as needed -->
+</head>
+<body>
+    <!-- Your existing HTML content -->
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDVOlw2iyAaKWiuBtqobqqJhvkMoTZ9MtQ",
+            authDomain: "buffmeup-b1282.firebaseapp.com",
+            projectId: "buffmeup-b1282",
+            storageBucket: "buffmeup-b1282.firebasestorage.app",
+            messagingSenderId: "853251681726",
+            appId: "1:853251681726:web:8d04ef6d24fcdc4b9eddef",
+            measurementId: "G-22696XTHQX"
+            };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+    <!-- Include checkout.js after Firebase initialization -->
+    <script src="JS/checkout.js"></script>
+</body>
+</html>

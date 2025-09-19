@@ -1,0 +1,795 @@
+/* Main container */
+.order-history-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 32px;
+  background: linear-gradient(135deg, #000000 0%, #1c1c1c 100%); /* Dark gradient for gym vibe */
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(242, 140, 56, 0.3); /* Orange shadow */
+  font-family: 'Oswald', 'Roboto', Arial, sans-serif; /* Gym font */
+  border: 2px solid #F28C38; /* Orange border */
+}
+
+/* Title inside container */
+.order-history-container h1 {
+  color: #F28C38; /* Orange title */
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: left;
+  border-bottom: 2px solid #F28C38; /* Orange border */
+  padding-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Page title */
+#page-title {
+    color: #F28C38; /* Orange title */
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    text-align: left;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Order table enhancements */
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1c1c1c; /* Darker for gym vibe */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(242, 140, 56, 0.3); /* Orange shadow */
+    border: 2px solid #F28C38; /* Orange border */
+}
+
+.order-table th {
+    background: linear-gradient(135deg, #F28C38, #FF6200); /* Orange gradient header */
+    color: #000000; /* Black text for contrast */
+    padding: 16px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.order-table td {
+    padding: 16px;
+    border-bottom: 1px solid #333333; /* Darker border */
+    vertical-align: middle;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.order-row {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.order-row:hover {
+    background: rgba(242, 140, 56, 0.1); /* Subtle orange hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(242, 140, 56, 0.3); /* Orange shadow */
+}
+
+/* Order status styling */
+.order-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid transparent;
+}
+
+.order-status.status-pending {
+    background: rgba(242, 140, 56, 0.1); /* Orange tint */
+    color: #F28C38;
+    border-color: #F28C38;
+}
+
+.order-status.status-confirmed {
+    background: rgba(242, 140, 56, 0.1); /* Orange tint */
+    color: #F28C38;
+    border-color: #F28C38;
+}
+
+.order-status.status-processing {
+    background: rgba(255, 255, 255, 0.05); /* Subtle white */
+    color: #cccccc;
+    border-color: #666666;
+}
+
+.order-status.status-shipped {
+    background: rgba(242, 140, 56, 0.1); /* Orange tint */
+    color: #F28C38;
+    border-color: #F28C38;
+}
+
+.order-status.status-delivered {
+    background: rgba(242, 140, 56, 0.2); /* Stronger orange */
+    color: #F28C38;
+    border-color: #FF6200;
+}
+
+.order-status.status-cancelled {
+    background: rgba(255, 77, 79, 0.1); /* Red tint for cancel */
+    color: #FF4D4F;
+    border-color: #FF4D4F;
+}
+
+/* Items preview */
+.items-preview {
+    font-size: 13px;
+    color: #cccccc;
+    line-height: 1.5;
+    max-width: 320px;
+}
+
+/* Details button */
+.btn-details {
+    background: linear-gradient(135deg, #F28C38, #FF6200); /* Orange gradient */
+    color: #000000;
+    border: none; /* Remove border for clean look */
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+}
+
+.btn-details:hover {
+    background: linear-gradient(135deg, #FF6200, #FF8F4C); /* Brighter orange */
+    color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(242, 140, 56, 0.4);
+}
+
+/* Order details container */
+.order-details-row td {
+    padding: 0;
+    border-bottom: none;
+}
+
+.order-details-container {
+    background: #1c1c1c;
+    padding: 24px;
+    border-radius: 10px;
+    margin: 12px 0;
+    border: 2px solid #F28C38; /* Orange border */
+    border-top: none;
+}
+
+/* Order info grid */
+.order-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.customer-section h4,
+.shipping-section h4,
+.order-summary-section h4,
+.items-section h4,
+.order-timeline h4 {
+    color: #F28C38; /* Orange titles */
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 2px solid #F28C38; /* Orange border */
+    padding-bottom: 10px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.customer-section h4 i,
+.order-summary-section h4 i,
+.items-section h4 i,
+.order-timeline h4 i {
+    color: #F28C38; /* Orange icons */
+    margin-right: 8px;
+}
+
+.customer-section p,
+.order-summary-section p {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* Info rows */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #333333; /* Darker border */
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #F28C38; /* Orange labels */
+}
+
+.info-value {
+    color: #ffffff;
+}
+
+/* Shipping address */
+.shipping-address {
+    background: #000000; /* Black background */
+    padding: 16px;
+    border-radius: 8px;
+    border: 2px solid #F28C38; /* Orange border */
+    line-height: 1.6;
+    color: #ffffff;
+}
+
+.shipping-address div {
+    margin-bottom: 6px;
+}
+
+.shipping-address div:last-child {
+    margin-bottom: 0;
+}
+
+/* Order summary */
+.order-summary-section {
+    background: #000000; /* Black background */
+    padding: 24px;
+    border-radius: 10px;
+    border: 2px solid #F28C38; /* Orange border */
+    margin-bottom: 32px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #333333; /* Darker border */
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.summary-line:last-child {
+    border-bottom: none;
+}
+
+.summary-line.total-line {
+    border-top: 2px solid #F28C38; /* Orange border */
+    margin-top: 12px;
+    padding-top: 16px;
+    font-size: 18px;
+    color: #F28C38; /* Orange total */
+    font-weight: 700;
+}
+
+/* Items section */
+.items-section {
+    margin-bottom: 32px;
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.item-card {
+    background: #1c1c1c;
+    border: 2px solid #F28C38; /* Orange border */
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+.item-card:hover {
+    box-shadow: 0 6px 20px rgba(242, 140, 56, 0.3); /* Orange shadow */
+    transform: translateY(-2px);
+    border-color: #FF6200; /* Brighter orange */
+}
+
+.item-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #F28C38; /* Orange border */
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    font-weight: 700;
+    color: #F28C38; /* Orange name */
+    font-size: 15px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.item-details {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+
+.item-variant {
+    font-size: 13px;
+    color: #cccccc;
+    background: rgba(242, 140, 56, 0.1); /* Orange tint */
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #F28C38; /* Orange border */
+}
+
+.item-quantity {
+    font-size: 13px;
+    color: #cccccc;
+    font-weight: 600;
+}
+
+/* Timeline */
+.order-timeline {
+    position: relative;
+    padding-left: 32px;
+    margin: 24px 0;
+}
+
+.order-timeline::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #F28C38, #FF6200); /* Orange gradient line */
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+    padding-left: 32px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -16px;
+    top: 4px;
+    width: 24px;
+    height: 24px;
+    background: #F28C38; /* Orange marker */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    font-size: 12px;
+    font-weight: 600;
+    border: 3px solid #1c1c1c; /* Dark border */
+}
+
+.timeline-content {
+    background: #1c1c1c;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #333333;
+    margin-bottom: 8px;
+}
+
+.timeline-date {
+    font-size: 13px;
+    color: #cccccc;
+    margin-bottom: 4px;
+}
+
+.timeline-status {
+    font-size: 14px;
+    font-weight: 600;
+    color: #F28C38; /* Orange status */
+    text-transform: uppercase;
+}
+
+/* Notification slide-in */
+.order-notification {
+    position: fixed;
+    top: 20px;
+    right: -400px; /* Start off-screen */
+    background: #1c1c1c;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    min-width: 320px;
+    max-width: 420px;
+    border-left: 4px solid #F28C38; /* Orange border */
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.order-notification.show {
+    transform: translateX(0);
+}
+
+.order-notification-success {
+    border-left-color: #F28C38;
+}
+
+.order-notification-error {
+    border-left-color: #FF4D4F; /* Red for error */
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.notification-message {
+    flex: 1;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #cccccc;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.notification-close:hover {
+    color: #F28C38; /* Orange on hover */
+}
+
+/* Loading states */
+.loading {
+    text-align: center;
+    padding: 48px;
+    color: #cccccc;
+}
+
+.loading::after {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 3px solid #333333;
+    border-top: 3px solid #F28C38; /* Orange spinner */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 12px;
+}
+
+.loading-row {
+    text-align: center;
+    padding: 48px;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    border: 3px solid #333333;
+    border-top: 3px solid #F28C38; /* Orange spinner */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Animation for status changes */
+@keyframes statusUpdate {
+    0% {
+        transform: scale(1);
+        background: rgba(242, 140, 56, 0.1);
+    }
+    50% {
+        transform: scale(1.05);
+        background: rgba(242, 140, 56, 0.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.status-updated {
+    animation: statusUpdate 0.6s ease-in-out;
+}
+
+/* Table hover effects */
+.order-table tbody tr {
+    position: relative;
+    z-index: 1;
+}
+
+.order-table tbody tr:hover {
+    z-index: 2;
+}
+
+/* Status icon animations */
+.fa-spin {
+    animation: fa-spin 2s infinite linear;
+}
+
+@keyframes fa-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(359deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Modal Overlay */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  overflow-y: auto;
+  backdrop-filter: blur(4px);
+}
+
+/* Modal Content */
+.modal-content {
+  background: #1c1c1c; /* Darker for gym vibe */
+  margin: 60px auto;
+  padding: 5px;
+  border-radius: 12px;
+  max-width: 900px;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(242, 140, 56, 0.3); /* Orange shadow */
+  border: 2px solid #F28C38; /* Orange border */
+}
+
+/* Close Button */
+.close-btn {
+  float: right;
+  margin-right: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #cccccc;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #F28C38; /* Orange on hover */
+}
+
+/* Logout Popup */
+#logoutPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Darker overlay */
+  display: none;
+  align-items: center;   /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  z-index: 3000;
+  backdrop-filter: blur(4px);
+}
+
+#logoutPopup.show { /* add a helper class for toggling */
+  display: flex;
+}
+
+#logoutPopup .modal-content {
+  background: #1c1c1c;
+  padding: 24px 32px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 350px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(242, 140, 56, 0.3); /* Orange shadow */
+  border: 2px solid #F28C38; /* Orange border */
+  animation: popupIn 0.3s ease;
+}
+
+#logoutPopup p {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/* Button styles */
+#logoutPopup .confirm-btn,
+#logoutPopup .cancel-btn {
+  padding: 10px 28px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+/* Yes (orange) */
+#logoutPopup .confirm-btn {
+  background: linear-gradient(135deg, #F28C38, #FF6200); /* Orange gradient */
+  color: #000000;
+}
+#logoutPopup .confirm-btn:hover {
+  background: linear-gradient(135deg, #FF6200, #FF8F4C); /* Brighter orange */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(242, 140, 56, 0.3);
+}
+
+/* No (red) */
+#logoutPopup .cancel-btn {
+  background: #FF4D4F; /* Red for cancel */
+  color: #ffffff;
+}
+#logoutPopup .cancel-btn:hover {
+  background: #FF6B6B; /* Brighter red */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
+}
+
+/* Animation */
+@keyframes popupIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .order-history-container {
+        padding: 20px;
+        margin: 20px auto;
+    }
+    
+    .order-info-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .items-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .item-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+    
+    .item-details {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    
+    .summary-line {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    
+    .order-notification {
+        left: 12px;
+        right: 12px;
+        min-width: auto;
+    }
+    
+    .order-table th,
+    .order-table td {
+        padding: 14px 10px;
+        font-size: 13px;
+    }
+    
+    .items-preview {
+        max-width: none;
+        font-size: 13px;
+    }
+    
+    .btn-details {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+    
+    .order-details-container {
+        margin: 0 10px 10px 10px;
+        padding: 20px;
+    }
+    
+    .timeline {
+        padding-left: 48px;
+    }
+    
+    .timeline::before {
+        left: 12px;
+    }
+    
+    .timeline-item {
+        padding-left: 48px;
+    }
+    
+    .timeline-marker {
+        left: -20px;
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+    
+    #page-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .order-table {
+        font-size: 12px;
+    }
+    
+    .order-table th,
+    .order-table td {
+        padding: 10px 6px;
+    }
+    
+    .order-status {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    .customer-section h4,
+    .order-summary-section h4,
+    .items-section h4,
+    .order-timeline h4 {
+        font-size: 16px;
+    }
+    
+    .item-card {
+        padding: 14px;
+    }
+    
+    .item-image {
+        width: 60px;
+        height: 60px;
+    }
+}

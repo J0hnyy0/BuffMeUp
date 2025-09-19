@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAJ Clothing - Profile</title>
+    <link rel="stylesheet" href="CSS/profile.css">
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut, deleteUser } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDVOlw2iyAaKWiuBtqobqqJhvkMoTZ9MtQ",
+            authDomain: "buffmeup-b1282.firebaseapp.com",
+            projectId: "buffmeup-b1282",
+            storageBucket: "buffmeup-b1282.firebasestorage.app",
+            messagingSenderId: "853251681726",
+            appId: "1:853251681726:web:8d04ef6d24fcdc4b9eddef",
+            measurementId: "G-22696XTHQX"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Common message display function
+        function showMessage(message, isError = false) {
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            messageElement.style.cssText = `
+                position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                padding: 10px 20px; border-radius: 5px; z-index: 1000;
+                color: ${isError ? '#ff4444' : '#4285f4'};
+                background-color: ${isError ? 'rgba(255,68,68,0.1)' : 'rgba(66,133,244,0.1)'};
+                border: ${isError ? '1px solid #ff4444' : '1px solid #4285f4'};
+            `;
+            document.body.appendChild(messageElement);
+            setTimeout(() => messageElement.remove(), 8000);
+        }
+
+        // Check auth state and update UI
+        window.addEventListener("DOMContentLoaded", () => {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // User is signed in
+                    const displayName = user.displayName || "User";
+                    document.getElementById("userFullName").textContent = displayName;
+                    document.getElementById("userEmail").textContent = user.email || "No email set";
+                    document.getElementById("profileInitial").textContent = displayName ? displayName[0].toUpperCase() : "U";
+                    document.getElementById("headerAvatar").textContent = displayName ? displayName[0].toUpperCase() : "U";
+                } else {
+                    // No user signed in, redirect to login
+                    window.location.href = "Register.html";
+                }
+            });
+
+            // Logout functionality
+            const logoutBtn = document.getElementById("logoutBtn");
+            const logoutModal = document.getElementById("logoutModal");
+            const confirmLogout = document.getElementById("confirmLogout");
+            const cancelLogout = document.getElementById("cancelLogout");
+
+            logoutBtn.addEventListener("click", () => {
+                logoutModal.style.display = "flex";
+            });
+
+            confirmLogout.addEventListener("click", async () => {
+                try {
+                    await signOut(auth);
+                    sessionStorage.clear();
+                    showMessage("Logged out successfully!");
+                    setTimeout(() => (window.location.href = "Register.html"), 1500);
+                } catch (err) {
+                    showMessage("Logout failed. Please try again.", true);
+                }
+                logoutModal.style.display = "none";
+            });
+
+            cancelLogout.addEventListener("click", () => {
+                logoutModal.style.display = "none";
+            });
+
+            // Delete account functionality
+            const deleteAccountBtn = document.getElementById("deleteAccountBtn");
+            const deleteModal = document.getElementById("deleteModal");
+            const confirmDelete = document.getElementById("confirmDelete");
+            const cancelDelete = document.getElementById("cancelDelete");
+            const deleteInput = document.getElementById("deleteInput");
+
+            deleteAccountBtn.addEventListener("click", () => {
+                deleteModal.style.display = "flex";
+                deleteInput.value = ""; // Clear input when modal opens
+                confirmDelete.disabled = true; // Disable button initially
+            });
+
+            // Enable/disable confirm button based on input
+            deleteInput.addEventListener("input", () => {
+                const inputValue = deleteInput.value.toLowerCase();
+                if (inputValue === "delete") {
+                    confirmDelete.disabled = false;
+                    confirmDelete.style.opacity = "1";
+                    confirmDelete.style.cursor = "pointer";
+                } else {
+                    confirmDelete.disabled = true;
+                    confirmDelete.style.opacity = "0.5";
+                    confirmDelete.style.cursor = "not-allowed";
+                }
+            });
+
+            confirmDelete.addEventListener("click", async () => {
+                const user = auth.currentUser;
+                if (user && deleteInput.value.toLowerCase() === "delete") {
+                    try {
+                        await deleteUser(user);
+                        sessionStorage.clear();
+                        showMessage("Account deleted successfully!");
+                        setTimeout(() => (window.location.href = "Register.html"), 1500);
+                    } catch (err) {
+                        showMessage("Failed to delete account. Please try again.", true);
+                    }
+                    deleteModal.style.display = "none";
+                }
+            });
+
+            cancelDelete.addEventListener("click", () => {
+                deleteModal.style.display = "none";
+                deleteInput.value = ""; // Clear input when modal closes
+            });
+        });
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="Collection.html" class="logo">BuffMeUp</a>
+            <div class="nav-right">
+                <a href="Collection.html" class="nav-link">Products</a>
+                <div class="profile-avatar-header" id="headerAvatar">A</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="back-to-menu">
+        <a href="Collection.html" class="back-link">
+            <svg class="back-arrow" viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+            Back to Menu
+        </a>
+    </div>
+
+    <div class="main-container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileInitial">A</div>
+                <div class="profile-info">
+                    <h1 id="userFullName">Your Full Name</h1>
+                    <p>View and manage your account details</p>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <div class="section-title">Email Address</div>
+                <div class="section-content" id="userEmail">123johnjose@gmail.com</div>
+            </div>
+
+            <div class="profile-actions">
+                <button class="btn btn-logout" id="logoutBtn">
+                    <svg class="btn-icon" viewBox="0 0 24 24">
+                        <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                    </svg>
+                    Log Out
+                </button>
+                <button class="btn btn-delete" id="deleteAccountBtn">
+                    <svg class="btn-icon" viewBox="0 0 24 24">
+                        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                    </svg>
+                    Delete Account
+                </button>
+            </div>
+        </div>
+    </div>
+
+   <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Contact Section -->
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <p><strong>Address:</strong> Kilid sa ilaha pero tua sa amoa </p>
+        <p><strong>Phone:</strong> +63905 628 8914</p>
+        <p><strong>Email:</strong> Princeallen587@gmail.com</p>
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- About Section -->
+      <div class="footer-column">
+        <h3>About</h3>
+        <ul>
+          <li><a>About us</a></li>
+          <li><a>Privacy Policy</a></li>
+          <li><a>Terms & Conditions</a></li>
+          <li><a>Contact us</a></li>
+        </ul>
+      </div>
+
+      <!-- Shop Section -->
+      <div class="footer-column">
+        <h3>Shop</h3>
+        <ul>
+          <li><a>Sports Nutrition</a></li>
+          <li><a>Dietary Supplements</a></li>
+          <li><a>fitness supplements</a></li>
+          <li><a>workout supplements.</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2025 BuffMeUp. All Rights Reserved.
+    </div>
+  </footer>
+
+    <!-- Logout Modal -->
+    <div class="modal" id="logoutModal">
+        <div class="modal-content">
+            <p>Are you sure you want to logout?</p>
+            <button class="confirm-btn" id="confirmLogout">Yes</button>
+            <button class="cancel-btn" id="cancelLogout">No</button>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <p>Are you sure you want to delete your account?<br><strong>This action cannot be undone.</strong></p>
+            <input type="text" id="deleteInput" placeholder="Type 'delete' here" style="
+            width: 100%;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+            border: 1px solid #444; 
+            border-radius: 8px;      
+            font-size: 16px;
+            box-sizing: border-box;
+            background: #1e1e1e;    
+            color: #fff;            
+            outline: none;           
+            ">
+            <button class="confirm-btn" id="confirmDelete" disabled style="opacity: 0.5; cursor: not-allowed;">Delete</button>
+            <button class="cancel-btn" id="cancelDelete">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>

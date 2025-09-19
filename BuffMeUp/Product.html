@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product - BuffMeUp</title>
+  <link rel="stylesheet" href="CSS/product.css">
+  <link rel="stylesheet" href="CSS/checkout.css">
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDVOlw2iyAaKWiuBtqobqqJhvkMoTZ9MtQ",
+      authDomain: "buffmeup-b1282.firebaseapp.com",
+      projectId: "buffmeup-b1282",
+      storageBucket: "buffmeup-b1282.firebasestorage.app",
+      messagingSenderId: "853251681726",
+      appId: "1:853251681726:web:8d04ef6d24fcdc4b9eddef",
+      measurementId: "G-22696XTHQX"
+    };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <a href="Homepage.html" class="logo">BuffMeUp</a>
+      <nav class="nav-right">
+        <a href="Collection.html" class="nav-link">Products</a>
+        <div class="cart-icon" onclick="toggleCart()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4.00488 16V4H2.00488V2H5.00488C5.55717 2 6.00488 2.44772 6.00488 3V15H18.4433L20.4433 7H8.00488V5H21.7241C22.2764 5 22.7241 5.44772 22.7241 6C22.7241 6.08176 22.7141 6.16322 22.6942 6.24254L20.1942 16.2425C20.083 16.6877 19.683 17 19.2241 17H5.00488C4.4526 17 4.00488 16.5523 4.00488 16ZM6.00488 23C4.90031 23 4.00488 22.1046 4.00488 21C4.00488 19.8954 4.90031 19 6.00488 19C7.10945 19 8.00488 19.8954 8.00488 21C8.00488 22.1046 7.10945 23 6.00488 23ZM18.0049 23C16.9003 23 16.0049 22.1046 16.0049 21C16.0049 19.8954 16.9003 19 18.0049 19C19.1095 19 20.0049 19.8954 20.0049 21C20.0049 22.1046 19.1095 23 18.0049 23Z"></path></svg>
+          <div class="cart-count" id="cartCount">0</div>
+        </div>
+        
+        <!-- Auth buttons -->
+        <div class="auth-buttons" id="authButtons">
+          <a href="Register.html" class="nav-link">Login</a>
+          <a href="Register.html" class="sign-up-btn">Sign Up</a>
+        </div>
+        
+        <!-- Profile menu -->
+        <div class="profile-menu" id="profileMenu">
+          <button class="profile-trigger" onclick="toggleProfileDropdown()">
+            <div class="profile-avatar" id="profileAvatar">U</div>
+            <span class="profile-name" id="profileName">User</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+              <path d="M6 8L2 4h8l-4 4z"/>
+            </svg>
+          </button>
+
+          <div class="profile-dropdown" id="profileDropdown">
+            <a href="Profile.html" class="profile-dropdown-item">
+              <svg class="profile-icon" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+              My Profile
+            </a>
+
+            <a href="Orderhistory.html" class="profile-dropdown-item">
+              <svg class="profile-icon" viewBox="0 0 24 24">
+                <path d="M13 3c-4.97 0-9 4.03-9 9s4.03 9 9 9
+                        9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7
+                        7-7 7 3.13 7 7-3.13 7-7 7zm-.5-13h-1v6l5.25 3.15.75-1.23-4.5-2.67V6z"/>
+              </svg>
+              Order History
+            </a>
+
+            <a href="#" class="profile-dropdown-item logout" onclick="showLogoutPopup(); return false;">
+              <svg class="profile-icon" viewBox="0 0 24 24">
+                <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58
+                        2.59L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2
+                        2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+              </svg>
+              Logout
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Cart Sidebar -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h2>Shopping Cart</h2>
+      <button class="cart-close-btn" onclick="toggleCart()">×</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-total" id="cartTotal">Total: ₱0.00</div>
+    <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+  </div>
+
+  <!-- Product Detail Page -->
+  <main class="product-detail">
+    <div class="container">
+      <a href="Collection.html" class="back-link">← BACK TO MUNE</a>
+      <div class="product-content">
+        <!-- Product Images -->
+        <div class="product-images">
+          <div class="main-image">
+            <button class="image-arrow left-arrow" onclick="prevImage()">◄</button>
+            <img id="mainImage" src="" alt="Product Image">
+            <button class="image-arrow right-arrow" onclick="nextImage()">►</button>
+          </div>
+          <div class="thumbnail-images">
+            <!-- Thumbnails will be dynamically generated -->
+          </div>
+          <div class="image-indicators">
+            <!-- Indicators will be dynamically generated -->
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="product-info">
+          <h1 class="product-title"></h1>
+          <div class="product-price"></div>
+          <p class="product-description"></p>
+
+          <!-- Quantity -->
+          <div class="product-option">
+            <label class="option-label">Quantity</label>
+            <div class="quantity-section">
+              <div class="quantity-controls">
+                <button class="quantity-btn" onclick="decreaseQuantity()">−</button>
+                <input type="number" class="quantity-input" value="1" min="1" id="quantity">
+                <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <button class="btn btn-primary" onclick="addToCart()">Add to cart</button>
+            <button class="btn btn-secondary" id="buyNowButton">Buy it now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Contact Section -->
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <p><strong>Address:</strong> Kilid sa ilaha pero tua sa amoa </p>
+        <p><strong>Phone:</strong> +63905 628 8914</p>
+        <p><strong>Email:</strong> Princeallen587@gmail.com</p>
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- About Section -->
+      <div class="footer-column">
+        <h3>About</h3>
+        <ul>
+          <li><a>About us</a></li>
+          <li><a>Privacy Policy</a></li>
+          <li><a>Terms & Conditions</a></li>
+          <li><a>Contact us</a></li>
+        </ul>
+      </div>
+
+      <!-- Shop Section -->
+      <div class="footer-column">
+        <h3>Shop</h3>
+        <ul>
+          <li><a>Sports Nutrition</a></li>
+          <li><a>Dietary Supplements</a></li>
+          <li><a>fitness supplements</a></li>
+          <li><a>workout supplements.</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2025 BuffMeUp. All Rights Reserved.
+    </div>
+  </footer>
+
+  <!-- Logout Confirmation Popup -->
+  <div id="logoutPopup" class="modal">
+    <div class="modal-content">
+      <p>Are you sure you want to logout?</p>
+      <button class="confirm-btn" onclick="confirmLogout()">Yes</button>
+      <button class="cancel-btn" onclick="closeLogoutPopup()">No</button>
+    </div>
+  </div>
+
+  <script type="module" src="JS/firebase-config.js"></script>
+  <script src="JS/product.js"></script>
+  <script type="module" src="JS/checkout.js"></script> 
+  <script src="JS/auth.js"></script>
+
+</body>   
+</html>

@@ -1,0 +1,459 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: none;
+    caret-color: transparent;
+}
+
+body {
+    font-family: 'Oswald', 'Roboto', Arial, sans-serif; /* Gym font */
+    background-color: #000000; /* Black for gym vibe */
+    color: #ffffff;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Header - STICKY FUNCTIONALITY */
+.header {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #000000 0%, #1c1c1c 100%); /* Dark gradient */
+    padding: 20px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid #F28C38; /* Orange border */
+    box-shadow: 0 2px 20px rgba(242, 140, 56, 0.2); /* Orange shadow */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 28px; /* Larger for bold branding */
+    font-weight: 700;
+    color: #F28C38; /* Orange logo */
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    color: #FF6200; /* Brighter orange */
+    text-shadow: 0 0 10px rgba(242, 140, 56, 0.6);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-link {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #F28C38; /* Orange on hover */
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background: linear-gradient(90deg, #F28C38, #FF6200); /* Orange gradient */
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.profile-avatar-header {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #F28C38, #FF6200); /* Orange gradient */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000; /* Black text for contrast */
+    border: 2px solid #1c1c1c; /* Dark border */
+}
+
+/* Back to Menu */
+.back-to-menu {
+    padding: 20px 40px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #F28C38; /* Orange link */
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.back-link:hover {
+    color: #FF6200; /* Brighter orange */
+    text-decoration: underline;
+}
+
+.back-arrow {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    display: block;
+}
+
+/* Main Content */
+.main-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 40px 60px;
+}
+
+.profile-card {
+    background-color: #1c1c1c; /* Darker for gym vibe */
+    border: 2px solid #F28C38; /* Orange border */
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(242, 140, 56, 0.3); /* Orange shadow */
+    display: block;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #F28C38, #FF6200); /* Orange gradient */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #000000; /* Black text */
+    border: 2px solid #F28C38; /* Orange border */
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-info h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #F28C38; /* Orange title */
+    margin-bottom: 4px;
+    display: block;
+    text-transform: uppercase;
+}
+
+.profile-info p {
+    font-size: 14px;
+    color: #cccccc;
+    display: block;
+}
+
+.profile-section {
+    margin-bottom: 30px;
+    display: block;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #F28C38; /* Orange title */
+    margin-bottom: 8px;
+    display: block;
+    text-transform: uppercase;
+}
+
+.section-content {
+    color: #cccccc;
+    font-size: 14px;
+    line-height: 1.5;
+    display: block;
+}
+
+.edit-link {
+    color: #F28C38; /* Orange link */
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 4px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.edit-link:hover {
+    color: #FF6200; /* Brighter orange */
+    text-decoration: underline;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #F28C38; /* Orange border */
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+}
+
+.btn-logout {
+    background: linear-gradient(135deg, #F28C38, #FF6200); /* Orange gradient */
+    color: #000000;
+    flex: 1;
+}
+
+.btn-logout:hover {
+    background: linear-gradient(135deg, #FF6200, #FF8F4C); /* Brighter orange */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(242, 140, 56, 0.3);
+}
+
+.btn-delete {
+    background: #FF4D4F; /* Red for delete */
+    color: #ffffff;
+    flex: 1;
+}
+
+.btn-delete:hover {
+    background: #FF6B6B; /* Brighter red */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
+}
+
+.btn-icon {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    display: block;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px 40px 40px;
+    border-top: 2px solid #F28C38; /* Orange border */
+    margin-top: 80px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.footer-column {
+    min-width: 200px;
+}
+
+.footer-column p {
+    font-size: 14px;
+    color: #cccccc;
+    margin: 6px 0;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin: 8px 0;
+}
+
+.footer-column ul li a {
+    color: #F28C38; /* Orange links */
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.footer-column ul li a:hover {
+    color: #FF6200; /* Brighter orange */
+    text-decoration: underline;
+}
+
+.social-icons {
+    text-align: center;
+}
+
+.social-icons a {
+    display: inline-block;
+    color: #F28C38; /* Orange icons */
+    font-size: 16px;
+    margin: 0 6px;
+}
+
+.social-icons a:hover {
+    color: #FF6200; /* Brighter orange */
+}
+
+.copyright {
+    font-size: 14px;
+    color: #888888;
+    text-align: center;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; 
+    position: fixed;
+    inset: 0; 
+    width: 100vw; 
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7); /* Darker overlay */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: #1c1c1c; /* Darker for gym vibe */
+    padding: 28px 24px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 360px;
+    width: 90%;
+    box-shadow: 0 8px 20px rgba(242, 140, 56, 0.3); /* Orange shadow */
+    border: 2px solid #F28C38; /* Orange border */
+    animation: fadeIn 0.25s ease-out;
+}
+
+.modal-content p {
+    margin: 0 0 24px;
+    color: #ffffff;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.modal-content button {
+    padding: 10px 28px;
+    margin: 0 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.modal-content .confirm-btn {
+    background: linear-gradient(135deg, #F28C38, #FF6200); /* Orange gradient */
+    color: #000000;
+}
+
+.modal-content .confirm-btn:hover {
+    background: linear-gradient(135deg, #FF6200, #FF8F4C); /* Brighter orange */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(242, 140, 56, 0.3);
+}
+
+.modal-content .cancel-btn {
+    background: #FF4D4F; /* Red for cancel */
+    color: #ffffff;
+}
+
+.modal-content .cancel-btn:hover {
+    background: #FF6B6B; /* Brighter red */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal.show {
+    display: flex;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+
+    .back-to-menu {
+        padding: 15px 20px;
+    }
+
+    .main-container {
+        padding: 20px 20px 40px;
+    }
+
+    .profile-card {
+        padding: 30px 20px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+    }
+}

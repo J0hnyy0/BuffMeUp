@@ -1,0 +1,506 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: none;
+}
+
+body {
+    font-family: 'Oswald', 'Roboto', Arial, sans-serif; /* Changed to Oswald for gym aesthetic */
+    background-color: #000000; /* Black for gym vibe */
+    color: #ffffff;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #000000 0%, #1c1c1c 100%); /* Darker gradient */
+    padding: 20px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid #F28C38; /* Orange border */
+    box-shadow: 0 2px 20px rgba(242, 140, 56, 0.2); /* Orange-tinted shadow */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 28px; /* Larger for bold gym branding */
+    font-weight: 700;
+    color: #F28C38; /* Orange logo */
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    color: #FF6200; /* Brighter orange */
+    text-shadow: 0 0 10px rgba(242, 140, 56, 0.6);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-link {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #F28C38; /* Orange on hover */
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background: linear-gradient(90deg, #F28C38, #FF6200); /* Orange gradient */
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    background: linear-gradient(135deg, #F28C38, #FF6200); /* Orange gradient */
+    color: #000000;
+}
+
+/* Main Content */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 200px);
+    padding: 40px 20px;
+}
+
+.auth-form {
+    background-color: #1c1c1c; /* Darker for gym vibe */
+    border: 2px solid #F28C38; /* Orange border */
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 30px rgba(242, 140, 56, 0.3); /* Orange shadow */
+    display: block;
+}
+
+/* Auth Toggle */
+.auth-toggle {
+    display: flex;
+    background-color: #000000; /* Black background */
+    border-radius: 8px;
+    padding: 4px;
+    margin-bottom: 30px;
+    gap: 2px;
+    border: 1px solid #F28C38; /* Orange border */
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 12px 24px;
+    background-color: transparent;
+    color: #cccccc;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    text-transform: uppercase;
+}
+
+.toggle-btn.active {
+    background: linear-gradient(135deg, #F28C38, #FF6200); /* Orange gradient */
+    color: #000000;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(242, 140, 56, 0.3);
+}
+
+.toggle-btn:hover:not(.active) {
+    color: #F28C38; /* Orange on hover */
+    background-color: rgba(242, 140, 56, 0.1);
+}
+
+/* Form Container */
+.form-container {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #F28C38; /* Orange title */
+    margin-bottom: 8px;
+    text-align: left;
+    display: block;
+    text-transform: uppercase;
+}
+
+.form-subtitle {
+    font-size: 16px;
+    color: #cccccc;
+    margin-bottom: 30px;
+    text-align: left;
+    display: block;
+}
+
+/* Message Display */
+#authMessage {
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.4;
+    border: 1px solid;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-success {
+    background-color: rgba(242, 140, 56, 0.1); /* Orange background */
+    border-color: #F28C38;
+    color: #F28C38;
+}
+
+.message-error {
+    background-color: rgba(255, 77, 79, 0.1); /* Red for errors */
+    border-color: #FF4D4F;
+    color: #FF4D4F;
+}
+
+.message-warning {
+    background-color: rgba(242, 140, 56, 0.1); /* Orange for warnings */
+    border-color: #F28C38;
+    color: #F28C38;
+}
+
+.message-info {
+    background-color: rgba(242, 140, 56, 0.1); /* Orange for info */
+    border-color: #F28C38;
+    color: #F28C38;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 20px;
+    display: block;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    color: #ffffff;
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    background-color: #1c1c1c; /* Darker for gym vibe */
+    border: 2px solid #F28C38; /* Orange border */
+    border-radius: 6px;
+    font-size: 16px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #FF6200; /* Brighter orange */
+    box-shadow: 0 0 0 2px rgba(242, 140, 56, 0.3);
+    background-color: #2a2a2a;
+}
+
+.form-input::placeholder {
+    color: #888888;
+}
+
+/* Password Container */
+.password-container {
+    position: relative;
+    display: block;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #F28C38; /* Orange toggle */
+    cursor: pointer;
+    padding: 4px;
+    transition: all 0.3s ease;
+    display: block;
+    border-radius: 4px;
+}
+
+.password-toggle:hover {
+    color: #FF6200; /* Brighter orange */
+    background-color: rgba(242, 140, 56, 0.1);
+}
+
+.password-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    display: block;
+}
+
+/* Forgot Password */
+.forgot-password {
+    text-align: right;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.forgot-password a {
+    color: #F28C38; /* Orange link */
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.forgot-password a:hover {
+    color: #FF6200; /* Brighter orange */
+    text-decoration: underline;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #F28C38, #FF6200); /* Orange gradient */
+    color: #000000;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px 0;
+    display: block;
+    text-transform: uppercase;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #FF6200, #FF8F4C); /* Brighter gradient */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(242, 140, 56, 0.3);
+}
+
+.submit-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.submit-btn:disabled {
+    background: #666666;
+    color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Resend Button Styles */
+.resend-btn {
+    background: linear-gradient(135deg, #F28C38, #FF6200); /* Orange gradient */
+    color: #000000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.resend-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #FF6200, #FF8F4C); /* Brighter gradient */
+    transform: translateY(-1px);
+}
+
+.resend-btn:disabled {
+    background: #666666;
+    color: #cccccc;
+    cursor: not-allowed;
+}
+
+.resend-btn.success {
+    background: linear-gradient(135deg, #F28C38, #FF6200); /* Orange for success */
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px 40px 40px;
+    border-top: 2px solid #F28C38; /* Orange border */
+    margin-top: 80px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.footer-column {
+    min-width: 200px;
+}
+
+.footer-column p {
+    font-size: 14px;
+    color: #cccccc;
+    margin: 6px 0;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin: 8px 0;
+}
+
+.footer-column ul li a {
+    color: #F28C38; /* Orange links */
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.footer-column ul li a:hover {
+    color: #FF6200; /* Brighter orange */
+    text-decoration: underline;
+}
+
+.social-icons {
+    text-align: center;
+}
+
+.social-icons a {
+    display: inline-block;
+    color: #F28C38; /* Orange icons */
+    font-size: 16px;
+    margin: 0 6px;
+}
+
+.social-icons a:hover {
+    color: #FF6200; /* Brighter orange */
+}
+
+.copyright {
+    font-size: 14px;
+    color: #888888;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+
+    .nav-right {
+        gap: 15px;
+    }
+
+    .auth-form {
+        padding: 30px 20px;
+        margin: 0 10px;
+        max-width: 100%;
+    }
+
+    .form-title {
+        font-size: 28px;
+    }
+
+    .main-container {
+        padding: 20px 10px;
+    }
+
+    .toggle-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-form {
+        padding: 25px 15px;
+    }
+    
+    .form-title {
+        font-size: 24px;
+    }
+    
+    .form-subtitle {
+        font-size: 14px;
+    }
+}
